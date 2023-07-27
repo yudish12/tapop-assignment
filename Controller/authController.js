@@ -20,13 +20,12 @@ export const registerUser = async (req, res) => {
       name: req.body.name,
       phoneNo: req.body.phoneNo,
       picture: {
-        data: req.file ? fs.readFileSync(req.file) : readDefaultImage(),
+        data: req.file ? fs.readFileSync(req.file.path) : readDefaultImage(),
         contentType: "image/png",
       },
     };
 
     const data = await User.create(obj);
-
     res.status(200).json({
       status: "success",
       data,
